@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"  E",
+		"BGB",
+		"PLP"
+	],
+	"key": {
+		"E": {
+			"tag": "forge:ender_pearls"
+		},
+		"B": {
+			"tag": "minecraft:buttons"
+		},
+		"G": {
+			"tag": "forge:glass_panes"
+		},
+		"P": {
+			"tag": "forge:ingots/iron"
+		},
+		"L": {
+			"tag": "forge:gems/diamond"
+		}
+	},
+	"result": {
+		"item": "logisticstrains:remote"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"itemGroup.logisticstrains": "Logistics Trains",
+	"block.logisticstrains.rail": "Logistics Rail",
+	"block.logisticstrains.train_station": "Train Station",
+	"item.logisticstrains.remote": "Logistics Trains Remote",
+	"item.logisticstrains.locomotive": "Locomotive",
+	"item.logisticstrains.item_cargo_cart": "Item Cargo Cart",
+	"item.logisticstrains.fluid_cargo_cart": "Fluid Cargo Cart",
+	"item.logisticstrains.energy_cargo_cart": "Energy Cargo Cart"
+}

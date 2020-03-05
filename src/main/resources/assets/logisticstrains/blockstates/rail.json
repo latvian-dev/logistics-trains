@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"shape=x_axis": {"model": "logisticstrains:block/rail/x_axis"},
+		"shape=z_axis": {"model": "logisticstrains:block/rail/z_axis"},
+		"shape=cross": {"model": "logisticstrains:block/rail/cross"},
+		"shape=turn_ne": {"model": "logisticstrains:block/rail/turn"},
+		"shape=turn_se": {"model": "logisticstrains:block/rail/turn", "y": 90},
+		"shape=turn_sw": {"model": "logisticstrains:block/rail/turn", "y": 180},
+		"shape=turn_nw": {"model": "logisticstrains:block/rail/turn", "y": 270},
+		"shape=double_ne_sw": {"model": "logisticstrains:block/rail/double"},
+		"shape=double_nw_se": {"model": "logisticstrains:block/rail/double", "y": 90}
+	}
+}

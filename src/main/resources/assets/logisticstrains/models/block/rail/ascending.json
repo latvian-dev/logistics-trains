@@ -1,0 +1,19 @@
+{
+	"parent": "logisticstrains:block/rail/base",
+	"elements": [
+		{
+			"from": [6, -3.2832, 8],
+			"to": [10, 19.7168, 11],
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 8, 8]},
+			"color": 6,
+			"faces": {
+				"north": {"uv": [6, 0, 10, 16], "texture": "#rail"},
+				"east": {"uv": [13, 0, 16, 16], "texture": "#rail"},
+				"south": {"uv": [6, 0, 10, 16], "texture": "#rail"},
+				"west": {"uv": [0, 0, 3, 16], "texture": "#rail"},
+				"up": {"uv": [6, 0, 10, 3], "texture": "#rail"},
+				"down": {"uv": [6, 13, 10, 16], "texture": "#rail"}
+			}
+		}
+	]
+}

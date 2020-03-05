@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"IRI",
+		"SSS"
+	],
+	"key": {
+		"I": {
+			"tag": "forge:ingots/iron"
+		},
+		"R": {
+			"tag": "forge:dusts/redstone"
+		},
+		"S": [
+			{
+				"tag": "forge:cobblestone"
+			},
+			{
+				"tag": "forge:stone"
+			}
+		]
+	},
+	"result": {
+		"item": "logisticstrains:rail",
+		"count": 12
+	}
+}

@@ -1,0 +1,34 @@
+modLoader="javafml"
+loaderVersion="[30,)"
+issueTrackerURL="https://github.com/LatvianModder/Logistics-Trains/issues"
+
+[[mods]]
+modId="logisticstrains"
+version="${file.jarVersion}"
+displayName="Logistics Trains"
+authors="LatvianModder"
+description='''
+Adds trains that can be used to transport resources and players over long distances in more controlled way
+'''
+logoFile="logisticstrains_logo.png"
+
+[[dependencies.logisticstrains]]
+    modId="forge"
+    mandatory=true
+    versionRange="[30,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.logisticstrains]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.logisticstrains]]
+    modId="itemfilters"
+    mandatory=true
+    versionRange="[2,)"
+    ordering="NONE"
+    side="BOTH"
