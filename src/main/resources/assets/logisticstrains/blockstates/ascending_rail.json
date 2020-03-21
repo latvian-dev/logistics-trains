@@ -1,8 +1,0 @@
-{
-	"variants": {
-		"facing=north": {"model": "logisticstrains:block/rail/ascending"},
-		"facing=south": {"model": "logisticstrains:block/rail/ascending", "y": 180},
-		"facing=west": {"model": "logisticstrains:block/rail/ascending", "y": 270},
-		"facing=east": {"model": "logisticstrains:block/rail/ascending", "y": 90}
-	}
-}

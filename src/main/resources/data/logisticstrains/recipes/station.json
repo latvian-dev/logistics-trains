@@ -1,0 +1,31 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"RIR",
+		"NXS",
+		"RCR"
+	],
+	"key": {
+		"I": {
+			"item": "minecraft:observer"
+		},
+		"C": {
+			"item": "minecraft:comparator"
+		},
+		"R": {
+			"item": "logisticstrains:rail"
+		},
+		"X": {
+			"item": "logisticstrains:cross_rail"
+		},
+		"N": {
+			"item": "logisticstrains:double_rail_nesw"
+		},
+		"S": {
+			"item": "logisticstrains:double_rail_nwse"
+		}
+	},
+	"result": {
+		"item": "logisticstrains:station"
+	}
+}

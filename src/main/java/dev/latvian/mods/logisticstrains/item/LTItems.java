@@ -11,4 +11,5 @@ import net.minecraftforge.registries.ObjectHolder;
 public class LTItems
 {
 	public static final Item REMOTE = Items.AIR;
+	public static final Item STATION = Items.AIR;
 }

@@ -1,11 +1,8 @@
 package dev.latvian.mods.logisticstrains.block;
 
-import dev.latvian.mods.logisticstrains.item.LTItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -21,18 +18,25 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 
 /**
  * @author LatvianModder
  */
-public class LTRailBlock extends LTRailBaseBlock
+public class LTRailBlock extends HorizontalLTRailBlock
 {
 	public static final EnumProperty<RailShape> SHAPE = EnumProperty.create("shape", RailShape.class);
 
 	public LTRailBlock(Properties properties)
 	{
 		super(properties);
-		setDefaultState(stateContainer.getBaseState().with(SHAPE, RailShape.Z_AXIS).with(BlockStateProperties.WATERLOGGED, false));
+		setDefaultState(getDefaultState().with(SHAPE, RailShape.Z_AXIS));
+	}
+
+	@Override
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+	{
+		builder.add(SHAPE, BlockStateProperties.WATERLOGGED);
 	}
 
 	@Override
@@ -57,72 +61,77 @@ public class LTRailBlock extends LTRailBaseBlock
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context)
-	{
-		if (context.getFace().getAxis().isHorizontal() && !(context.getWorld().getBlockState(context.getPos().offset(context.getFace().getOpposite())).getBlock() instanceof LTRailBaseBlock))
-		{
-			return LTBlocks.VERTICAL_RAIL.getDefaultState().with(HorizontalBlock.HORIZONTAL_FACING, context.getFace().getOpposite()).with(BlockStateProperties.WATERLOGGED, context.getWorld().getFluidState(context.getPos()).getFluid() == Fluids.WATER);
-		}
-
-		BlockState s = getDefaultState().with(BlockStateProperties.WATERLOGGED, context.getWorld().getFluidState(context.getPos()).getFluid() == Fluids.WATER);
-
-		boolean railN = isRail(context, Direction.NORTH);
-		boolean railS = isRail(context, Direction.SOUTH);
-		boolean railW = isRail(context, Direction.WEST);
-		boolean railE = isRail(context, Direction.EAST);
-
-		if (railN && railS && railW && railE)
-		{
-			return s.with(SHAPE, RailShape.CROSS);
-		}
-		else if ((railN || railS) && !railW && !railE)
-		{
-			return s.with(SHAPE, RailShape.Z_AXIS);
-		}
-		else if (!railN && !railS && (railW || railE))
-		{
-			return s.with(SHAPE, RailShape.X_AXIS);
-		}
-
-		return s;
-	}
-
-	@Override
 	@Deprecated
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult target)
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult p_225533_6_)
 	{
-		if (player.getHeldItem(hand).getItem() == LTItems.REMOTE)
+		if (player.isCrouching())
 		{
-			RailShape shape = state.get(SHAPE);
-
-			if (shape == RailShape.CROSS)
-			{
-				world.setBlockState(pos, state.with(SHAPE, RailShape.DOUBLE_NE_SW), 3);
-			}
-			else if (shape == RailShape.DOUBLE_NE_SW)
-			{
-				world.setBlockState(pos, state.with(SHAPE, RailShape.DOUBLE_NW_SE), 3);
-			}
-			else if (shape == RailShape.DOUBLE_NW_SE)
-			{
-				world.setBlockState(pos, state.with(SHAPE, RailShape.CROSS), 3);
-			}
-
+			worldIn.setBlockState(pos, state.cycle(SHAPE), Constants.BlockFlags.DEFAULT);
 			return ActionResultType.SUCCESS;
 		}
 
 		return ActionResultType.PASS;
 	}
 
-	private boolean isRail(BlockItemUseContext context, Direction dir)
+	@Override
+	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		BlockState state = context.getWorld().getBlockState(context.getPos().offset(dir));
-		return state.getBlock() == this;
+		BlockState parent = super.getStateForPlacement(context);
+		Direction placement = context.getPlacementHorizontalFacing();
+
+		if (placement.getAxis() == Direction.Axis.Z)
+		{
+			if (context.getPlayer() == null || !context.getPlayer().isCrouching())
+			{
+				BlockPos wp = context.getPos().offset(Direction.WEST);
+				BlockPos ep = context.getPos().offset(Direction.EAST);
+				BlockState w = context.getWorld().getBlockState(wp);
+				BlockState e = context.getWorld().getBlockState(ep);
+
+				boolean wr = w.getBlock() instanceof RedirectingRail && ((RedirectingRail) w.getBlock()).redirect(w, context.getWorld(), wp, Direction.EAST.getIndex()) != -1;
+				boolean er = e.getBlock() instanceof RedirectingRail && ((RedirectingRail) e.getBlock()).redirect(e, context.getWorld(), ep, Direction.WEST.getIndex()) != -1;
+
+				if (wr && !er)
+				{
+					return parent.with(SHAPE, placement == Direction.NORTH ? RailShape.TURN_NW : RailShape.TURN_SW);
+				}
+				else if (er && !wr)
+				{
+					return parent.with(SHAPE, placement == Direction.NORTH ? RailShape.TURN_NE : RailShape.TURN_SE);
+				}
+			}
+
+			return parent.with(SHAPE, RailShape.Z_AXIS);
+		}
+		else
+		{
+			if (context.getPlayer() == null || !context.getPlayer().isCrouching())
+			{
+				BlockPos np = context.getPos().offset(Direction.NORTH);
+				BlockPos sp = context.getPos().offset(Direction.SOUTH);
+				BlockState n = context.getWorld().getBlockState(np);
+				BlockState s = context.getWorld().getBlockState(sp);
+
+				boolean nr = n.getBlock() instanceof RedirectingRail && ((RedirectingRail) n.getBlock()).redirect(n, context.getWorld(), np, Direction.SOUTH.getIndex()) != -1;
+				boolean sr = s.getBlock() instanceof RedirectingRail && ((RedirectingRail) s.getBlock()).redirect(s, context.getWorld(), np, Direction.NORTH.getIndex()) != -1;
+
+				if (nr && !sr)
+				{
+					return parent.with(SHAPE, placement == Direction.WEST ? RailShape.TURN_NW : RailShape.TURN_NE);
+				}
+				else if (sr && !nr)
+				{
+					return parent.with(SHAPE, placement == Direction.WEST ? RailShape.TURN_SW : RailShape.TURN_SE);
+				}
+			}
+
+			return parent.with(SHAPE, RailShape.X_AXIS);
+		}
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+	public int redirect(BlockState state, World world, BlockPos pos, int from)
 	{
-		builder.add(SHAPE, BlockStateProperties.WATERLOGGED);
+		return state.get(SHAPE).redirect[from];
 	}
 }

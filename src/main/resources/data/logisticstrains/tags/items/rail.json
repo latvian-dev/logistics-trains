@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"logisticstrains:rail",
+		"logisticstrains:slanting_rail",
+		"logisticstrains:vertical_rail",
+		"logisticstrains:cross_rail",
+		"logisticstrains:double_rail_nesw",
+		"logisticstrains:double_rail_nwse"
+	]
+}

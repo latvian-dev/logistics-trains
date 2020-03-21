@@ -1,7 +1,12 @@
 {
 	"itemGroup.logisticstrains": "Logistics Trains",
+	"block.logisticstrains.station": "Train Station",
 	"block.logisticstrains.rail": "Logistics Rail",
-	"block.logisticstrains.train_station": "Train Station",
+	"block.logisticstrains.slanting_rail": "Logistics Rail (Slanting)",
+	"block.logisticstrains.vertical_rail": "Logistics Rail (Vertical)",
+	"block.logisticstrains.cross_rail": "Logistics Rail (Cross)",
+	"block.logisticstrains.double_rail_nesw": "Logistics Rail (Double NE-SW)",
+	"block.logisticstrains.double_rail_nwse": "Logistics Rail (Double NW-SE)",
 	"item.logisticstrains.remote": "Logistics Trains Remote",
 	"item.logisticstrains.locomotive": "Locomotive",
 	"item.logisticstrains.item_cargo_cart": "Item Cargo Cart",

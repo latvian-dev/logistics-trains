@@ -3,10 +3,10 @@ package dev.latvian.mods.logisticstrains.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -21,22 +21,23 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author LatvianModder
  */
-public class LTRailBaseBlock extends Block
+public abstract class LTRailBlockBase extends Block
 {
-	public LTRailBaseBlock(Properties properties)
+	public LTRailBlockBase(Properties properties)
 	{
 		super(properties);
 		setDefaultState(stateContainer.getBaseState().with(BlockStateProperties.WATERLOGGED, false));
 	}
 
 	@Override
-	@Deprecated
-	public ItemStack getItem(IBlockReader world, BlockPos pos, BlockState state)
+	public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player)
 	{
-		return new ItemStack(LTBlocks.RAIL);
+		return true;
 	}
 
 	@Override
@@ -82,10 +83,10 @@ public class LTRailBaseBlock extends Block
 	}
 
 	@Override
+	@Nonnull
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-		return getDefaultState().with(BlockStateProperties.WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+		return getDefaultState().with(BlockStateProperties.WATERLOGGED, context.getWorld().getFluidState(context.getPos()).getFluid() == Fluids.WATER);
 	}
 
 	@Override
@@ -131,18 +132,23 @@ public class LTRailBaseBlock extends Block
 	@Deprecated
 	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean isMoving)
 	{
-		notifyNetwork(state, world, pos);
+		if (!world.isRemote())
+		{
+			notifyNetwork(state, world, pos);
+		}
 	}
 
 	@Override
 	@Deprecated
 	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving)
 	{
-		super.onReplaced(state, world, pos, newState, isMoving);
-		notifyNetwork(state, world, pos);
+		if (!world.isRemote())
+		{
+			notifyNetwork(state, world, pos);
+		}
 	}
 
-	private void notifyNetwork(BlockState state, World world, BlockPos pos)
+	public void notifyNetwork(BlockState state, World world, BlockPos pos)
 	{
 	}
 }

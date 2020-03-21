@@ -1,0 +1,11 @@
+{
+	"multipart": [
+		{"apply": {"model": "logisticstrains:block/station"}},
+		{"apply": {"model": "logisticstrains:block/rail/x_axis"}},
+		{"apply": {"model": "logisticstrains:block/rail/z_axis"}},
+		{"apply": {"model": "logisticstrains:block/rail/turn", "y": 0}},
+		{"apply": {"model": "logisticstrains:block/rail/turn", "y": 90}},
+		{"apply": {"model": "logisticstrains:block/rail/turn", "y": 180}},
+		{"apply": {"model": "logisticstrains:block/rail/turn", "y": 270}}
+	]
+}

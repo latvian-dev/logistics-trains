@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" R",
+		"R "
+	],
+	"key": {
+		"R": {
+			"tag": "logisticstrains:rail"
+		}
+	},
+	"result": {
+		"item": "logisticstrains:slanting_rail",
+		"count": 2
+	}
+}

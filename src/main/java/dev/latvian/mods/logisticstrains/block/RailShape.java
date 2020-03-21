@@ -6,50 +6,58 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author LatvianModder
  */
 public enum RailShape implements IStringSerializable
 {
-	X_AXIS("x_axis", xAxisShape(), new DirectionPair(Direction.WEST, Direction.EAST)),
-	Z_AXIS("z_axis", zAxisShape(), new DirectionPair(Direction.NORTH, Direction.SOUTH)),
-	CROSS("cross", VoxelShapes.or(xAxisShape(), zAxisShape()), new DirectionPair(Direction.WEST, Direction.EAST), new DirectionPair(Direction.NORTH, Direction.SOUTH)),
-	TURN_NE("turn_ne", turnNEShape(), new DirectionPair(Direction.NORTH, Direction.EAST)),
-	TURN_SE("turn_se", turnSEShape(), new DirectionPair(Direction.SOUTH, Direction.EAST)),
-	TURN_SW("turn_sw", turnSWShape(), new DirectionPair(Direction.SOUTH, Direction.WEST)),
-	TURN_NW("turn_nw", turnNWShape(), new DirectionPair(Direction.NORTH, Direction.WEST)),
-	DOUBLE_NE_SW("double_ne_sw", VoxelShapes.or(turnNEShape(), turnSWShape()), new DirectionPair(Direction.NORTH, Direction.EAST), new DirectionPair(Direction.SOUTH, Direction.WEST)),
-	DOUBLE_NW_SE("double_nw_se", VoxelShapes.or(turnNWShape(), turnSEShape()), new DirectionPair(Direction.NORTH, Direction.WEST), new DirectionPair(Direction.SOUTH, Direction.EAST)),
+	X_AXIS("x_axis", "z_axis", xAxisShape(), new DirectionPair(Direction.WEST, Direction.EAST)),
+	Z_AXIS("z_axis", "x_axis", zAxisShape(), new DirectionPair(Direction.NORTH, Direction.SOUTH)),
+	TURN_NW("turn_nw", "turn_ne", turnNWShape(), new DirectionPair(Direction.NORTH, Direction.WEST)),
+	TURN_NE("turn_ne", "turn_se", turnNEShape(), new DirectionPair(Direction.NORTH, Direction.EAST)),
+	TURN_SE("turn_se", "turn_sw", turnSEShape(), new DirectionPair(Direction.SOUTH, Direction.EAST)),
+	TURN_SW("turn_sw", "turn_nw", turnSWShape(), new DirectionPair(Direction.SOUTH, Direction.WEST)),
 
 	;
 
+	public static final Map<String, RailShape> MAP = new HashMap<>();
+
+	static
+	{
+		for (RailShape shape : values())
+		{
+			MAP.put(shape.name, shape);
+		}
+
+		for (RailShape shape : MAP.values())
+		{
+			shape.rotationCW = MAP.get(shape.rotationCW0);
+		}
+	}
+
 	private final String name;
-	public VoxelShape voxelShape;
-	public final DirectionPair[] pairs;
+	private final String rotationCW0;
+	public final VoxelShape voxelShape;
+	public final DirectionPair directionPair;
 	public final int[] redirect;
 
-	RailShape(String n, VoxelShape s, DirectionPair... p)
+	public RailShape rotationCW;
+
+	RailShape(String n, String rc, VoxelShape s, DirectionPair p)
 	{
 		name = n;
+		rotationCW0 = rc;
 		voxelShape = s;
-		pairs = p;
+		directionPair = p;
 		redirect = new int[6];
 
 		for (int from = 0; from < 6; from++)
 		{
-			redirect[from] = -1;
-
-			for (DirectionPair pair : pairs)
-			{
-				redirect[from] = pair.redirect(from);
-
-				if (redirect[from] != -1)
-				{
-					break;
-				}
-			}
+			redirect[from] = directionPair.redirect(from);
 		}
 	}
 
@@ -61,7 +69,17 @@ public enum RailShape implements IStringSerializable
 
 	public RailShape rotate(Rotation rotation)
 	{
-		return this;
+		switch (rotation)
+		{
+			case CLOCKWISE_90:
+				return rotationCW;
+			case CLOCKWISE_180:
+				return rotationCW.rotationCW;
+			case COUNTERCLOCKWISE_90:
+				return rotationCW.rotationCW.rotationCW;
+			default:
+				return this;
+		}
 	}
 
 	public RailShape mirror(Mirror mirror)
@@ -79,23 +97,23 @@ public enum RailShape implements IStringSerializable
 		return Block.makeCuboidShape(6, 0, 0, 10, 3, 16);
 	}
 
-	public static VoxelShape turnNEShape()
+	public static VoxelShape turnNWShape()
 	{
-		return Block.makeCuboidShape(0, 0, 0, 16, 3, 16);
+		return Block.makeCuboidShape(0, 0, 0, 10, 3, 10);
 	}
 
-	public static VoxelShape turnSEShape()
+	public static VoxelShape turnNEShape()
 	{
-		return Block.makeCuboidShape(0, 0, 0, 16, 3, 16);
+		return Block.makeCuboidShape(6, 0, 0, 16, 3, 10);
 	}
 
 	public static VoxelShape turnSWShape()
 	{
-		return Block.makeCuboidShape(0, 0, 0, 16, 3, 16);
+		return Block.makeCuboidShape(0, 0, 6, 10, 3, 16);
 	}
 
-	public static VoxelShape turnNWShape()
+	public static VoxelShape turnSEShape()
 	{
-		return Block.makeCuboidShape(0, 0, 0, 16, 3, 16);
+		return Block.makeCuboidShape(6, 0, 6, 16, 3, 16);
 	}
 }

@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model": "logisticstrains:block/rail/slanting"},
+		"facing=south": {"model": "logisticstrains:block/rail/slanting", "y": 180},
+		"facing=west": {"model": "logisticstrains:block/rail/slanting", "y": 270},
+		"facing=east": {"model": "logisticstrains:block/rail/slanting", "y": 90}
+	}
+}

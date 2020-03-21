@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"RR"
+	],
+	"key": {
+		"R": {
+			"item": "logisticstrains:double_rail_nesw"
+		}
+	},
+	"result": {
+		"item": "logisticstrains:double_rail_nwse",
+		"count": 2
+	}
+}

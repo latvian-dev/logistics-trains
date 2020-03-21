@@ -9,5 +9,5 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder("logisticstrains")
 public class LTBlockEntities
 {
-	public static final TileEntityType<TrainStationEntity> TRAIN_STATION = null;
+	public static final TileEntityType<StationEntity> STATION = null;
 }

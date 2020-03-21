@@ -6,7 +6,7 @@
 			"entries": [
 				{
 					"type": "minecraft:item",
-					"name": "logisticstrains:vertical_rail"
+					"name": "logisticstrains:double_rail_nesw"
 				}
 			],
 			"conditions": [
