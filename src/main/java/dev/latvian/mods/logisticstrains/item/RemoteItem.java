@@ -1,5 +1,6 @@
 package dev.latvian.mods.logisticstrains.item;
 
+import dev.latvian.mods.logisticstrains.LogisticsTrains;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,9 +14,9 @@ import net.minecraft.world.World;
  */
 public class RemoteItem extends Item
 {
-	public RemoteItem(Properties properties)
+	public RemoteItem()
 	{
-		super(properties);
+		super(new Properties().group(LogisticsTrains.instance.itemGroup));
 	}
 
 	@Override

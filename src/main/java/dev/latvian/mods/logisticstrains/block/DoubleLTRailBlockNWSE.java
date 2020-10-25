@@ -22,11 +22,6 @@ public class DoubleLTRailBlockNWSE extends HorizontalLTRailBlock
 	private static final VoxelShape SHAPE = VoxelShapes.or(RailShape.turnNWShape(), RailShape.turnSEShape());
 	private static final int[] REDIRECT = {-1, -1, 3, 2, 5, 4};
 
-	public DoubleLTRailBlockNWSE(Properties properties)
-	{
-		super(properties);
-	}
-
 	@Override
 	@Deprecated
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
@@ -46,7 +41,7 @@ public class DoubleLTRailBlockNWSE extends HorizontalLTRailBlock
 	{
 		if (player.isCrouching())
 		{
-			world.setBlockState(pos, LTBlocks.DOUBLE_RAIL_NESW.getDefaultState().with(BlockStateProperties.WATERLOGGED, state.get(BlockStateProperties.WATERLOGGED)), Constants.BlockFlags.DEFAULT);
+			world.setBlockState(pos, LTBlocks.DOUBLE_RAIL_NESW.get().getDefaultState().with(BlockStateProperties.WATERLOGGED, state.get(BlockStateProperties.WATERLOGGED)), Constants.BlockFlags.DEFAULT);
 			return ActionResultType.SUCCESS;
 		}
 

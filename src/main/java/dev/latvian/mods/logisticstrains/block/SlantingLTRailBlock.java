@@ -32,9 +32,8 @@ public class SlantingLTRailBlock extends LTRailBlockBase
 		return Block.makeCuboidShape(x, y, z, x + 6, y + 6, z + 6);
 	}
 
-	public SlantingLTRailBlock(Properties properties)
+	public SlantingLTRailBlock()
 	{
-		super(properties);
 		setDefaultState(getDefaultState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.SOUTH));
 	}
 

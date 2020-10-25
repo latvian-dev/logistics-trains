@@ -12,6 +12,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -29,11 +30,6 @@ import java.util.UUID;
 public class StationBlock extends LTRailBlockBase
 {
 	private static final VoxelShape SHAPE = makeCuboidShape(0, 0, 0, 16, 3, 16);
-
-	public StationBlock(Properties properties)
-	{
-		super(properties);
-	}
 
 	@Override
 	public boolean hasTileEntity(BlockState state)
@@ -79,7 +75,7 @@ public class StationBlock extends LTRailBlockBase
 
 		if (entity instanceof StationEntity && !world.isRemote())
 		{
-			player.sendMessage(new StringTextComponent("Station " + ((StationEntity) entity).stationID));
+			player.sendMessage(new StringTextComponent("Station " + ((StationEntity) entity).stationID), Util.DUMMY_UUID);
 		}
 
 		return ActionResultType.SUCCESS;
@@ -105,7 +101,7 @@ public class StationBlock extends LTRailBlockBase
 					double py = pos.getY() + RANDOM.nextDouble() * d1;
 					double pz = pos.getZ() + RANDOM.nextDouble() * d1 + d2;
 
-					ItemStack stack = new ItemStack(LTItems.STATION);
+					ItemStack stack = new ItemStack(LTItems.STATION.get());
 					stack.setTag(new CompoundNBT());
 					stack.getTag().putUniqueId("StationID", ((StationEntity) entity).stationID);
 					ItemEntity itemEntity = new ItemEntity(world, px, py, pz, stack);

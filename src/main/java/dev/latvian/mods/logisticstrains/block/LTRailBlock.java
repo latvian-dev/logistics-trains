@@ -27,9 +27,8 @@ public class LTRailBlock extends HorizontalLTRailBlock
 {
 	public static final EnumProperty<RailShape> SHAPE = EnumProperty.create("shape", RailShape.class);
 
-	public LTRailBlock(Properties properties)
+	public LTRailBlock()
 	{
-		super(properties);
 		setDefaultState(getDefaultState().with(SHAPE, RailShape.Z_AXIS));
 	}
 
@@ -66,7 +65,7 @@ public class LTRailBlock extends HorizontalLTRailBlock
 	{
 		if (player.isCrouching())
 		{
-			worldIn.setBlockState(pos, state.cycle(SHAPE), Constants.BlockFlags.DEFAULT);
+			worldIn.setBlockState(pos, state.func_235896_a_(SHAPE), Constants.BlockFlags.DEFAULT);
 			return ActionResultType.SUCCESS;
 		}
 

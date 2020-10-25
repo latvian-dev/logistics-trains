@@ -1,5 +1,6 @@
 package dev.latvian.mods.logisticstrains.block.entity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -16,7 +17,7 @@ public class StationEntity extends TileEntity
 
 	public StationEntity()
 	{
-		super(LTBlockEntities.STATION);
+		super(LTBlockEntities.STATION.get());
 		stationID = new UUID(0L, 0L);
 	}
 
@@ -28,9 +29,9 @@ public class StationEntity extends TileEntity
 	}
 
 	@Override
-	public void read(CompoundNBT nbt)
+	public void read(BlockState state, CompoundNBT nbt)
 	{
-		super.read(nbt);
+		super.read(state, nbt);
 		stationID = nbt.getUniqueId("StationID");
 	}
 
@@ -41,9 +42,9 @@ public class StationEntity extends TileEntity
 	}
 
 	@Override
-	public void handleUpdateTag(CompoundNBT tag)
+	public void handleUpdateTag(BlockState state, CompoundNBT tag)
 	{
-		read(tag);
+		read(state, tag);
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class StationEntity extends TileEntity
 	@Override
 	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
 	{
-		handleUpdateTag(pkt.getNbtCompound());
+		handleUpdateTag(getBlockState(), pkt.getNbtCompound());
 	}
 
 	public void redstoneChanged(boolean powered)

@@ -2,10 +2,14 @@ package dev.latvian.mods.logisticstrains.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.StateContainer;
@@ -22,15 +26,16 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author LatvianModder
  */
 public abstract class LTRailBlockBase extends Block
 {
-	public LTRailBlockBase(Properties properties)
+	public LTRailBlockBase()
 	{
-		super(properties);
+		super(Block.Properties.create(Material.IRON, MaterialColor.LIGHT_GRAY).hardnessAndResistance(0.4F).sound(SoundType.METAL).notSolid());
 		setDefaultState(stateContainer.getBaseState().with(BlockStateProperties.WATERLOGGED, false));
 	}
 
@@ -63,21 +68,7 @@ public abstract class LTRailBlockBase extends Block
 
 	@Override
 	@Deprecated
-	public boolean causesSuffocation(BlockState state, IBlockReader world, BlockPos pos)
-	{
-		return false;
-	}
-
-	@Override
-	@Deprecated
-	public boolean isNormalCube(BlockState state, IBlockReader world, BlockPos pos)
-	{
-		return false;
-	}
-
-	@Override
-	@Deprecated
-	public boolean canEntitySpawn(BlockState state, IBlockReader world, BlockPos pos, EntityType<?> entityType)
+	public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType)
 	{
 		return false;
 	}
@@ -91,7 +82,7 @@ public abstract class LTRailBlockBase extends Block
 
 	@Override
 	@Deprecated
-	public IFluidState getFluidState(BlockState state)
+	public FluidState getFluidState(BlockState state)
 	{
 		return state.get(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}

@@ -1,8 +1,10 @@
 package dev.latvian.mods.logisticstrains.item;
 
+import dev.latvian.mods.logisticstrains.LogisticsTrains;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -19,9 +21,9 @@ import java.util.List;
  */
 public class StationItem extends BlockItem
 {
-	public StationItem(Block block, Properties properties)
+	public StationItem(Block block)
 	{
-		super(block, properties);
+		super(block, new Item.Properties().group(LogisticsTrains.instance.itemGroup));
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class StationItem extends BlockItem
 	{
 		if (stack.getTag() != null && stack.getTag().hasUniqueId("StationID"))
 		{
-			tooltip.add(new StringTextComponent(stack.getTag().getUniqueId("StationID").toString()).applyTextStyle(TextFormatting.DARK_GRAY));
+			tooltip.add(new StringTextComponent(stack.getTag().getUniqueId("StationID").toString()).mergeStyle(TextFormatting.DARK_GRAY));
 		}
 	}
 }

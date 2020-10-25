@@ -26,9 +26,8 @@ public class VerticalLTRailBlock extends LTRailBlockBase
 	private static final VoxelShape W_SHAPE = Block.makeCuboidShape(0, 0, 6, 3, 16, 10);
 	private static final VoxelShape E_SHAPE = Block.makeCuboidShape(13, 0, 6, 16, 16, 10);
 
-	public VerticalLTRailBlock(Properties properties)
+	public VerticalLTRailBlock()
 	{
-		super(properties);
 		setDefaultState(getDefaultState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.SOUTH));
 	}
 
@@ -82,7 +81,7 @@ public class VerticalLTRailBlock extends LTRailBlockBase
 		{
 			BlockState state = context.getWorld().getBlockState(context.getPos().offset(context.getFace().getOpposite()));
 
-			if (state.getBlock() == LTBlocks.VERTICAL_RAIL)
+			if (state.getBlock() == LTBlocks.VERTICAL_RAIL.get())
 			{
 				return super.getStateForPlacement(context).with(HorizontalBlock.HORIZONTAL_FACING, state.get(HorizontalBlock.HORIZONTAL_FACING));
 			}

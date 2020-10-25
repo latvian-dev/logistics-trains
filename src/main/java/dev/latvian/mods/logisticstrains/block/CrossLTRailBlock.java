@@ -16,11 +16,6 @@ public class CrossLTRailBlock extends HorizontalLTRailBlock
 	private static final VoxelShape SHAPE = VoxelShapes.or(RailShape.xAxisShape(), RailShape.zAxisShape());
 	private static final int[] REDIRECT = {-1, -1, 3, 2, 5, 4};
 
-	public CrossLTRailBlock(Properties properties)
-	{
-		super(properties);
-	}
-
 	@Override
 	@Deprecated
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
