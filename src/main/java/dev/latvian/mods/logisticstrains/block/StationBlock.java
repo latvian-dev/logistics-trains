@@ -1,6 +1,7 @@
 package dev.latvian.mods.logisticstrains.block;
 
 import dev.latvian.mods.logisticstrains.block.entity.StationEntity;
+import dev.latvian.mods.logisticstrains.entity.TrainEntity;
 import dev.latvian.mods.logisticstrains.item.LTItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -75,7 +76,17 @@ public class StationBlock extends LTRailBlockBase
 
 		if (entity instanceof StationEntity && !world.isRemote())
 		{
-			player.sendMessage(new StringTextComponent("Station " + ((StationEntity) entity).stationID), Util.DUMMY_UUID);
+			if (player.getHeldItem(hand).getItem() == LTItems.TRAIN.get())
+			{
+				TrainEntity trainEntity = new TrainEntity(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
+				trainEntity.rotationYaw = player.rotationYaw;
+				world.addEntity(trainEntity);
+				player.getHeldItem(hand).shrink(1);
+			}
+			else
+			{
+				player.sendMessage(new StringTextComponent("Station " + ((StationEntity) entity).stationID), Util.DUMMY_UUID);
+			}
 		}
 
 		return ActionResultType.SUCCESS;

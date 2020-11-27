@@ -41,7 +41,7 @@ public class DoubleLTRailBlockNWSE extends HorizontalLTRailBlock
 	{
 		if (player.isCrouching())
 		{
-			world.setBlockState(pos, LTBlocks.DOUBLE_RAIL_NESW.get().getDefaultState().with(BlockStateProperties.WATERLOGGED, state.get(BlockStateProperties.WATERLOGGED)), Constants.BlockFlags.DEFAULT);
+			world.setBlockState(pos, LTBlocks.CROSS_RAIL.get().getDefaultState().with(BlockStateProperties.WATERLOGGED, state.get(BlockStateProperties.WATERLOGGED)), Constants.BlockFlags.DEFAULT);
 			return ActionResultType.SUCCESS;
 		}
 

@@ -1,16 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"RIR",
+		"RCR",
 		"NXS",
-		"RCR"
+		"ROR"
 	],
 	"key": {
-		"I": {
+		"O": {
 			"item": "minecraft:observer"
 		},
 		"C": {
-			"item": "minecraft:comparator"
+			"item": "logisticstrains:circuit"
 		},
 		"R": {
 			"item": "logisticstrains:rail"

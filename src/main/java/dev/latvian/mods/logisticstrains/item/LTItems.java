@@ -18,11 +18,13 @@ public class LTItems
 {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "logisticstrains");
 
+	public static final RegistryObject<Item> CIRCUIT = ITEMS.register("circuit", () -> new Item(new Item.Properties().group(LogisticsTrains.itemGroup)));
 	public static final RegistryObject<Item> REMOTE = ITEMS.register("remote", RemoteItem::new);
+	public static final RegistryObject<Item> TRAIN = ITEMS.register("train", TrainItem::new);
 
 	private static Supplier<BlockItem> railItem(RegistryObject<Block> b)
 	{
-		return () -> new BlockItem(b.get(), new Item.Properties().group(LogisticsTrains.instance.itemGroup));
+		return () -> new BlockItem(b.get(), new Item.Properties().group(LogisticsTrains.itemGroup));
 	}
 
 	public static final RegistryObject<Item> STATION = ITEMS.register("station", () -> new StationItem(LTBlocks.STATION.get()));

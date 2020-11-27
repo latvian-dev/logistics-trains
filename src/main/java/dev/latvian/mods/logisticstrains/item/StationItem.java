@@ -23,19 +23,7 @@ public class StationItem extends BlockItem
 {
 	public StationItem(Block block)
 	{
-		super(block, new Item.Properties().group(LogisticsTrains.instance.itemGroup));
-	}
-
-	@Override
-	public int getItemStackLimit(ItemStack stack)
-	{
-		return stack.getTag() != null && stack.getTag().hasUniqueId("StationID") ? 1 : 64;
-	}
-
-	@Override
-	public boolean hasEffect(ItemStack stack)
-	{
-		return stack.getTag() != null && stack.getTag().hasUniqueId("StationID");
+		super(block, new Item.Properties().group(LogisticsTrains.itemGroup).maxStackSize(16));
 	}
 
 	@Override

@@ -8,8 +8,10 @@
 	"block.logisticstrains.double_rail_nesw": "Logistics Rail (Double NE-SW)",
 	"block.logisticstrains.double_rail_nwse": "Logistics Rail (Double NW-SE)",
 	"item.logisticstrains.remote": "Logistics Trains Remote",
+	"item.logisticstrains.circuit": "Train Circuit",
+	"item.logisticstrains.train": "Train",
 	"item.logisticstrains.locomotive": "Locomotive",
-	"item.logisticstrains.item_cargo_cart": "Item Cargo Cart",
-	"item.logisticstrains.fluid_cargo_cart": "Fluid Cargo Cart",
-	"item.logisticstrains.energy_cargo_cart": "Energy Cargo Cart"
+	"item.logisticstrains.cargo_wagon": "Cargo Wagon",
+	"item.logisticstrains.tank_wagon": "Tank Wagon",
+	"item.logisticstrains.battery_wagon": "Battery Wagon"
 }

@@ -1,22 +1,18 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"  E",
 		"BGB",
-		"PLP"
+		"CLC"
 	],
 	"key": {
-		"E": {
-			"tag": "forge:ender_pearls"
-		},
 		"B": {
 			"tag": "minecraft:buttons"
 		},
 		"G": {
 			"tag": "forge:glass_panes"
 		},
-		"P": {
-			"tag": "forge:ingots/iron"
+		"C": {
+			"item": "logisticstrains:circuit"
 		},
 		"L": {
 			"tag": "forge:gems/diamond"

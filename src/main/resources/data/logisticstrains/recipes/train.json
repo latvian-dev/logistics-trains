@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"IIC",
+		"RFG",
+		"III"
+	],
+	"key": {
+		"C": {
+			"item": "logisticstrains:circuit"
+		},
+		"F": {
+			"item": "minecraft:furnace_minecart"
+		},
+		"I": {
+			"tag": "forge:ingots/iron"
+		},
+		"G": {
+			"tag": "forge:glass_panes"
+		},
+		"R": {
+			"tag": "forge:storage_blocks/redstone"
+		}
+	},
+	"result": {
+		"item": "logisticstrains:train"
+	}
+}

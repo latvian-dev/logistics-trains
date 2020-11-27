@@ -16,7 +16,7 @@ public class RemoteItem extends Item
 {
 	public RemoteItem()
 	{
-		super(new Properties().group(LogisticsTrains.instance.itemGroup));
+		super(new Properties().group(LogisticsTrains.itemGroup).maxStackSize(1));
 	}
 
 	@Override

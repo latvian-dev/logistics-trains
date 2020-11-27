@@ -3,6 +3,7 @@ package dev.latvian.mods.logisticstrains;
 import dev.latvian.mods.logisticstrains.block.LTBlocks;
 import dev.latvian.mods.logisticstrains.block.entity.LTBlockEntities;
 import dev.latvian.mods.logisticstrains.client.LTClient;
+import dev.latvian.mods.logisticstrains.entity.LTEntities;
 import dev.latvian.mods.logisticstrains.item.LTItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -19,7 +20,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class LogisticsTrains
 {
 	public static LogisticsTrains instance;
-	public ItemGroup itemGroup;
+	public static ItemGroup itemGroup;
 
 	public LogisticsTrains()
 	{
@@ -27,6 +28,7 @@ public class LogisticsTrains
 		LTBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		LTItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		LTBlockEntities.BLOCK_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+		LTEntities.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
 		itemGroup = new ItemGroup("logisticstrains")
 		{
